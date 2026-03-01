@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Quiz, GameState } from '../types/quiz';
+import type { Quiz, GameState } from '../types/quiz';
 import { quizzes, shuffleQuizzes } from '../data/quizzes';
 
 interface QuizGameProps {

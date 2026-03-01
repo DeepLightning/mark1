@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Score } from '../types/quiz';
+import type { Score } from '../types/quiz';
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from '../firebase/config';
 
