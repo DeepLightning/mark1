@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { ref, onValue, set, update } from 'firebase/database';
 import { realtimeDb } from '../firebase/config';
-import type { Room, Player } from '../types/multiplayer';
+import type { Room } from '../types/multiplayer';
 
 interface WaitingRoomProps {
   roomId: string;

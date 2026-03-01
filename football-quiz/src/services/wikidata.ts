@@ -181,16 +181,16 @@ export async function verifyPlayerCareer(
  * Wikidata API를 실제로 호출하여 선수 정보를 가져오는 함수
  * (향후 구현 예정)
  */
-async function fetchPlayerDataFromWikidata(playerName: string): Promise<any> {
-  // TODO: Wikidata SPARQL API 호출
-  // const sparqlQuery = `
-  //   SELECT ?player ?playerLabel ?team ?teamLabel WHERE {
-  //     ?player wdt:P31 wd:Q5.
-  //     ?player rdfs:label "${playerName}"@ko.
-  //     ?player wdt:P54 ?team.
-  //     SERVICE wikibase:label { bd:serviceParam wikibase:language "ko,en". }
-  //   }
-  // `;
-
-  return null;
-}
+// async function fetchPlayerDataFromWikidata(playerName: string): Promise<any> {
+//   // TODO: Wikidata SPARQL API 호출
+//   // const sparqlQuery = `
+//   //   SELECT ?player ?playerLabel ?team ?teamLabel WHERE {
+//   //     ?player wdt:P31 wd:Q5.
+//   //     ?player rdfs:label "${playerName}"@ko.
+//   //     ?player wdt:P54 ?team.
+//   //     SERVICE wikibase:label { bd:serviceParam wikibase:language "ko,en". }
+//   //   }
+//   // `;
+//
+//   return null;
+// }
