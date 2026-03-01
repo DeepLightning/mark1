@@ -44,13 +44,14 @@ const Lobby = ({ onJoinRoom }: LobbyProps) => {
         score: 0,
         isHost: true,
         isReady: false,
+        role: 'player',  // 방장은 기본적으로 플레이어
       };
 
       const newRoom: Room = {
         id: roomId,
         code,
         hostId: playerId,
-        players: { [playerId]: player },
+        participants: { [playerId]: player },
         phase: 'waiting',
         currentRound: 0,
         maxRounds: 3,
@@ -58,8 +59,9 @@ const Lobby = ({ onJoinRoom }: LobbyProps) => {
         createdAt: Date.now(),
         updatedAt: Date.now(),
         settings: {
-          teamInputTime: 30,
-          answerTime: 30,
+          teamInputTime: 3,  // 3초로 변경
+          maxPlayers: 3,
+          maxSpectators: 10,
         },
       };
 
@@ -126,9 +128,10 @@ const Lobby = ({ onJoinRoom }: LobbyProps) => {
         return;
       }
 
-      // 방이 가득 찼는지 확인 (최대 3명)
-      const playerCount = Object.keys(targetRoom.players).length;
-      if (playerCount >= 3) {
+      // 방이 가득 찼는지 확인 (플레이어 + 관객)
+      const participantCount = Object.keys(targetRoom.participants).length;
+      const maxTotal = targetRoom.settings.maxPlayers + targetRoom.settings.maxSpectators;
+      if (participantCount >= maxTotal) {
         setError('방이 가득 찼습니다');
         return;
       }
@@ -140,11 +143,12 @@ const Lobby = ({ onJoinRoom }: LobbyProps) => {
         score: 0,
         isHost: false,
         isReady: false,
+        role: 'spectator',  // 기본적으로 관객으로 입장
       };
 
-      // 플레이어 추가
+      // 참여자 추가
       await set(
-        ref(realtimeDb, `rooms/${targetRoomId}/players/${playerId}`),
+        ref(realtimeDb, `rooms/${targetRoomId}/participants/${playerId}`),
         newPlayer
       );
 

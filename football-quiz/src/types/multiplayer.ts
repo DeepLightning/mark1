@@ -5,6 +5,7 @@ export interface Player {
   score: number;
   isHost: boolean;
   isReady: boolean;
+  role: 'player' | 'spectator';  // 플레이어 또는 관객
 }
 
 // 게임 단계
@@ -49,16 +50,18 @@ export interface Room {
   id: string;
   code: string;               // 6자리 방 코드
   hostId: string;             // 방장 ID
-  players: Record<string, Player>; // 플레이어 목록
+  participants: Record<string, Player>; // 모든 참여자 (플레이어 + 관객)
   phase: GamePhase;           // 현재 게임 단계
   currentRound: number;       // 현재 라운드 번호
   maxRounds: number;          // 총 라운드 수
   rounds: Round[];            // 라운드 기록
   createdAt: number;
   updatedAt: number;
+  gameStartTimer?: number;    // 게임 시작 타이머 (10초)
   settings: {
     teamInputTime: number;    // 팀 입력 제한 시간 (초)
-    answerTime: number;       // 답변 제한 시간 (초)
+    maxPlayers: number;       // 최대 플레이어 수
+    maxSpectators: number;    // 최대 관객 수
   };
 }
 
